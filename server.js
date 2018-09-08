@@ -1,15 +1,15 @@
 'use strict';
 
-var express     = require('express');
-var bodyParser  = require('body-parser');
-var expect      = require('chai').expect;
-var cors        = require('cors');
+const express     = require('express');
+const bodyParser  = require('body-parser');
+const expect      = require('chai').expect;
+const cors        = require('cors');
 
-var apiRoutes         = require('./routes/api.js');
-var fccTestingRoutes  = require('./routes/fcctesting.js');
-var runner            = require('./test-runner');
+const apiRoutes         = require('./routes/api.js');
+const fccTestingRoutes  = require('./routes/fcctesting.js');
+const runner            = require('./test-runner');
 
-var app = express();
+const app = express();
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
@@ -36,8 +36,8 @@ app.route('/')
 fccTestingRoutes(app);
 
 //Routing for API 
-apiRoutes(app);  
-    
+apiRoutes(app);
+//
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
@@ -54,7 +54,7 @@ app.listen(process.env.PORT || 3000, function () {
       try {
         runner.run();
       } catch(e) {
-        var error = e;
+        const error = e;
           console.log('Tests are not valid:');
           console.log(error);
       }
