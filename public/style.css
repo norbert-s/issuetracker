@@ -21,3 +21,26 @@ body {
 .id {
   font-size: 10.5px;
 }
+
+input[type=text] {
+  width: 300px;
+}
+
+.align_divs{
+  width:80%;
+  margin:auto;
+  display:grid;
+  justify-items: center;
+  grid-template-columns:1fr 1fr;
+}
+#apitests{
+  align-self:start;
+}
+#jsonFrame{
+  width:80%;
+  margin:auto;
+
+}
+#jsonResult{
+  padding:5px;
+}

@@ -2,15 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const issueSchema = new Schema({
-    title:  {type:String,required:true,minlength:5,maxlength:255},
-    text: {type:String,required:true,minlength:5,maxlength:255},
+    title:  {type:String,maxlength:255},
+    text: {type:String,maxlength:3000},
 
-    created_by:{type:String,required:true,minlength:5,maxlength:255},
+    created_by:{type:String,maxlength:255},
 
-    assigned_to:{type:String,maxlength:35},
+    assigned_to:{type:String,maxlength:50},
     status_text:{type:String,maxlength:50},
     status:{type:Boolean, default:true},
-    date:{type:Date, default: Date.now}
+    created_on:{type:Date, default: Date.now},
+    update_on:{type:Date}
 } ,{ collection: 'issues' });
 
 const MyIssue = mongoose.model('MyIssue', issueSchema);
