@@ -36,11 +36,17 @@ input[type=text] {
 #apitests{
   align-self:start;
 }
-#jsonFrame{
-  width:80%;
-  margin:auto;
+
+#jsonResult{
 
 }
-#jsonResult{
-  padding:5px;
+.main{
+  width:80%;
+  margin:auto;
+}
+#jsonFrame{
+  width:70%;
+  border:1px solid;
+  margin:auto;
+
 }

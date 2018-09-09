@@ -11,7 +11,7 @@ const issueSchema = new Schema({
     status_text:{type:String,maxlength:50},
     status:{type:Boolean, default:true},
     created_on:{type:Date, default: Date.now},
-    update_on:{type:Date}
+    update_on:{type:Date, default :Date.now}
 } ,{ collection: 'issues' });
 
 const MyIssue = mongoose.model('MyIssue', issueSchema);
