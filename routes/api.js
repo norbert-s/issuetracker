@@ -74,7 +74,7 @@ module.exports = function (app) {
                 statusItt=false;
 
             console.log('status'+statusItt);
-                let objektum ={status:statusItt,title:iTitle,text:iText,created_by:createdBy,
+                let myObj ={status:statusItt,title:iTitle,text:iText,created_by:createdBy,
                 assigned_to:assignedTo,status_text:statusText};
 
             console.log(`${iText}  ${iTitle} ${createdBy}`);
@@ -86,13 +86,13 @@ module.exports = function (app) {
                 if(myIssue==undefined) res.send('id cannot be found in the database');
                 else{
 
-                    for (let i in objektum) {
-                        if (objektum[i] == '' || objektum[i] == undefined ||objektum[i]==null) {
+                    for (let i in myObj) {
+                        if (myObj[i] == '' || myObj[i] == undefined ||myObj[i]==null) {
                             console.log('null itt');
                         }
                         else{
-                            console.log('obj val'+ objektum[i]);
-                            myIssue[i]=objektum[i];
+                            console.log('obj val'+ myObj[i]);
+                            myIssue[i]=myObj[i];
                         }
                     }
 
@@ -114,46 +114,73 @@ module.exports = function (app) {
             })
         })
         .get(function (req,res){
-            let body = req.body;
-            let iTitle = body.issue_title,
+            let body = req.query;
+            let id=body._id,
+                iTitle = body.issue_title,
                 iText = body.issue_text,
                 createdBy = body.created_by,
                 assignedTo = body.assigned_to,
                 statusText = body.status_text,
-                status = body.status;
-            console.log(`text ${iText}  title ${iTitle} createdby ${createdBy} status ${status}`);
+                _status=body.status,
+                statusItt = detStatus(_status);
+
+            console.log('status'+_status);
+            function detStatus(_status){
+                if(_status==='o'){
+                    console.log('itt o');
+                   return true;
+                }
+                else if(_status==='c'){
+                    console.log('itt c');
+                     return 'false';
+                }
+                else{
+                    console.log('itt null');
+                    return null;
+                }
+            }
+
+            console.log(_status);
+                // checkThis();
+            console.log(`title ${iTitle} text ${iText}   createdby ${createdBy} `);
+            let myObj ={_id:id,title:iTitle,text:iText,created_by:createdBy,
+                assigned_to:assignedTo,status_text:statusText,status:statusItt};
+
             let joiVal = getOne.validate({
                 title: iTitle,
                 text: iText,
                 created_by: createdBy,
-
             });
-            if (joiVal.error) res.send(joiVal.error.message);
-            else {
-                console.log('user call');
-                let myIssue = new MyIssue({
-                    title: iTitle,
-                    text: iText,
-                    created_by: createdBy,
-                    assigned_to: assignedTo,
-                    status_text: statusText,
-                    status:status
-                });
-                console.log('kollekcio :');
-                myIssue.save((err, doc) => {
-                    if (err) return res.send(err);
-                    else {
-                        res.send({
-                            result: 'Successfully created',
-                            title: iTitle,
-                            text: iText,
-                            created_by: createdBy,
-                            assigned_to: assignedTo,
-                            status_text: statusText,
-                            id: doc._id
-                        });
+            function findQueryCreator(myObj){
+                let newObj = myObj;
+
+                for(let i in newObj){
+                    console.log(`ez az iiiiiiii${i}: ${newObj[i]}`);
+                    if(newObj[i]==undefined || newObj[i]=='' || newObj[i]==null){
+                        // /console.log(newObj.i);
+                        // console.log('ifbe'+newObj[i]);
+                        delete newObj[i];
                     }
-                });
+                }
+                return newObj;
+            }
+            // myObj.status = statusItt;
+
+
+
+            if (joiVal.error) res.send(joiVal.error.message);
+            else{
+                let myNewObj = findQueryCreator(myObj);
+                console.log('myogbj');
+                console.log(myNewObj);
+                 MyIssue.find(myNewObj).exec( function(err,myIssue) {
+                    // console.log('myissue elotte'+myIssue);
+                        if(err) res.send('no data can be gathered based on provided query');
+                        else{
+                            res.send(myIssue);
+                        }
+                //
+                })
             }
         })
         .delete(function (req, res){
