@@ -14,11 +14,12 @@ let deleteIssue=router.delete('/api/issues/apitest',async function (req, res){
     deleteOne.validate({
         id:id
     });
-    let dThis
+    let dThis;
     await MyIssue.findOne({_id:id},async function(err,myIssue){
         dThis = myIssue;
         console.log('myissue'+myIssue);
         if(myIssue==undefined) res.send('the id that you are trying to delete is not in the database');
+        else if(err) res.send(err);
         else{
             await MyIssue.deleteOne({_id:id},async function(err,myIssue){
                 if(err) res.send('Something went wrong, try again');
@@ -35,6 +36,7 @@ let deleteIssue=router.delete('/api/issues/apitest',async function (req, res){
                     <strong>status_text</strong>: ${dThis.status_text}<br>
                     <strong>created_on</strong>: ${dThis.created_on}<br>
                     <strong>updated_on</strong>: ${dThis.update_on}</div>`;
+                    // console.log(myIssue);
                     await res.send(str);
 
                 }

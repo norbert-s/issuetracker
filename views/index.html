@@ -56,9 +56,9 @@
       <div>
       <h3>Submit issue on <i>apitest</i></h3>
       <form id="testForm" class="border" action="/api/issues/apitest" method="post">
-        <input type="text" name="issue_title" placeholder="*Title"  ><br>
-        <textarea type="text" name="issue_text" placeholder="*Text"  ></textarea><br>
-        <input type="text" name="created_by" placeholder="*Created by"  ><br>
+        <input type="text" name="issue_title" placeholder="(required)Title"><br>
+        <textarea type="text" name="issue_text" placeholder="(required)Text"></textarea><br>
+        <input type="text" name="created_by" placeholder="(required)Created by"><br>
         <input type="text" name="assigned_to" placeholder="(optional)Assigned to" ><br>
         <input type="text" name="status_text" placeholder="(optional)Status text" ><br>
         <button type="submit">Submit Issue</button>
@@ -67,14 +67,14 @@
       <div>
         <h3>Delete issue on <i>apitest</i></h3>
         <form id="testForm3" class="border" action="/api/issues/apitest" method="delete">
-          <input type="text" name="_id" placeholder="_id" ><br>
+          <input type="text" name="_id" placeholder="(required)_id" ><br>
           <button type="submit">Delete Issue</button>
         </form>
       </div>
       <div>
       <h3>Update issue on <i>apitest</i> </h3>
       <form id="testForm2" class="border" action="/api/issues/update" method="put">
-        <input type="text" name="_id" placeholder="*_id"  ><br>
+        <input type="text" name="_id" placeholder="(required)_id"  ><br>
         <input type="text" name="issue_title" placeholder="(optional)Title" ><br>
         <textarea type="text" name="issue_text" placeholder="(optional)Text" ></textarea><br>
         <input type="text" name="created_by" placeholder="(optional)Created by" ><br>

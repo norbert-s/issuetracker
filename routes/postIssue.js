@@ -16,7 +16,7 @@ let postIssue = router.post('/api/issues/apitest',function (req,res){
         assignedTo = body.assigned_to,
         statusText = body.status_text,
         status = true;
-    console.log(`${iText}  ${iTitle} ${createdBy}`);
+    // console.log(`${iText}  ${iTitle} ${createdBy}`);
     let joiVal = postOne.validate({
         title: iTitle,
         text: iText,
@@ -24,7 +24,7 @@ let postIssue = router.post('/api/issues/apitest',function (req,res){
     });
     if (joiVal.error) res.send(joiVal.error.message);
     else {
-        console.log('user call');
+        // console.log('user call');
         let myIssue = new MyIssue({
             title: iTitle,
             text: iText,
@@ -33,11 +33,11 @@ let postIssue = router.post('/api/issues/apitest',function (req,res){
             status_text: statusText,
             status:status
         });
-        console.log('kollekcio :');
+        // console.log('kollekcio :');
         myIssue.save((err, doc) => {
             if (err) return res.send(err);
             else {
-                let str = `\`<div id="jsonResult" class="jsonClass"><strong>result</strong>: Successfully created<br>
+                let str = `<div id="jsonResult" class="jsonClass"><strong>result</strong>: Successfully created<br>
                 <strong>status</strong>: ${doc.status}<br>
                 <strong>id</strong>: ${doc._id}<br>
                 <strong>title</strong>: ${iTitle}<br>
