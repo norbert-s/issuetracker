@@ -15,49 +15,117 @@ chai.use(chaiHttp);
 
 suite('Functional Tests', function() {
   
-    suite('POST /api/issues/{project} => object with issue data', function() {
-      
-      test('Every field filled in', function(done) {
-       chai.request(server)
-        .post('/api/issues/test')
-        .send({
-          issue_title: 'Title',
-          issue_text: 'text',
-          created_by: 'Functional Test - Every field filled in',
-          assigned_to: 'Chai and Mocha',
-          status_text: 'In QA'
-        })
-        .end(function(err, res){
-          assert.equal(res.status, 200);
-          
-          //fill me in too!
-          
-          done();
-        });
-      });
-      
-      test('Required fields filled in', function(done) {
-        
-      });
-      
-      test('Missing required fields', function(done) {
-        
-      });
-      
-    });
+    // suite('POST /api/issues/{project} => object with issue data', function() {
+    //
+    //   test('Every field filled in', function(done) {
+    //    chai.request(server)
+    //     .post('/api/issues/apitest')
+    //     .send({
+    //       issue_title: 'Title',
+    //       issue_text: 'text',
+    //       created_by: 'Functional Test - Every field filled in',
+    //       assigned_to: 'Chai and Mocha',
+    //       status_text: 'In QA'
+    //     })
+    //     .end(function(err, res){
+    //       assert.equal(res.status, 200);
+    //
+    //
+    //
+    //       done();
+    //     });
+    //   });
+    //
+    //   test('Required fields filled in', function(done) {
+    //       chai.request(server)
+    //           .post('/api/issues/apitest')
+    //           .send({
+    //               issue_title: 'Title',
+    //               issue_text: 'text',
+    //               created_by: 'Functional Test - Every field filled in',
+    //               assigned_to: '',
+    //               status_text: ''
+    //           })
+    //           .end(function(err, res){
+    //               assert.equal(res.status, 200);
+    //
+    //               //fill me in too!
+    //
+    //               done();
+    //           });
+    //   });
+    //
+    //   test('Missing required fields', function(done) {
+    //       chai.request(server)
+    //           .post('/api/issues/apitest')
+    //           .send({
+    //               issue_title: '',
+    //               issue_text: '',
+    //               created_by: '',
+    //               assigned_to: '',
+    //               status_text: ''
+    //           })
+    //           .end(function(err, res){
+    //               assert.equal(res.status, 200);
+    //               assert.equal(err);
+    //               done();
+    //           });
+    //   });
+    //
+    // });
     
     suite('PUT /api/issues/{project} => text', function() {
       
       test('No body', function(done) {
-        
+          chai.request(server)
+              .put('/api/issues/apitest')
+              .send({
+                  _id :'',
+                  issue_title: '',
+                  issue_text: '',
+                  created_by: '',
+                  assigned_to: '',
+                  status_text: ''
+              })
+              .end(function(err, res){
+                  assert.equal(res.status, 200);
+                  assert.equal(res.send(err));
+                  done();
+              });
       });
       
       test('One field to update', function(done) {
-        
+          chai.request(server)
+          .put('/api/issues/apitest')
+              .send({
+                  _id :'5b9714bb16f727e12c889521',
+                  issue_title: '',
+                  issue_text: '',
+                  created_by: 'Functional Test - updating this2',
+                  assigned_to: '',
+                  status_text: ''
+              })
+              .end(function(err, res){
+                  assert.equal(res.status, 200);
+                  done();
+              });
       });
       
       test('Multiple fields to update', function(done) {
-        
+          chai.request(server)
+              .put('/api/issues/apitest')
+              .send({
+                  _id :'5b9714bb16f727e12c889521',
+                  issue_title: '',
+                  issue_text: '',
+                  created_by: 'Functional Test - updating this2',
+                  assigned_to: 'fcc',
+                  status_text: 'again'
+              })
+              .end(function(err, res){
+                  assert.equal(res.status, 200);
+                  done();
+              });
       });
       
     });

@@ -25,7 +25,8 @@ let connection = mongoose.connect(key,{ useNewUrlParser: true })
     .catch(err => console.error('could not connect to mongo db',err));
 //Sample front-end
 
-
+app.use(helmet());
+app.use(helmet.hidePoweredBy({setTo: "PHP 4.2"}));
 app.route('/:project/')
   .get(function (req, res) {
     res.sendFile(process.cwd() + '/views/issue.html');

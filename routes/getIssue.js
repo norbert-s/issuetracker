@@ -60,18 +60,17 @@ let getIssue =router.get('/api/issues/apitest',function (req,res){
             if(err) res.send('no data can be gathered based on provided query');
             else{
                 let str = '';
-
                 let keys = Object.entries(myIssue);
                 for(let i in keys){
-                    str += `status: ${keys[i][1]['status']}<br>
-                            id: ${keys[i][1]['_id']}<br>
-                            title: ${keys[i][1]['title']}<br>
-                            text: ${keys[i][1]['text']}<br>
-                            created by: ${keys[i][1]['created_by']}<br>
-                            assigned to: ${keys[i][1]['assigned_to']}<br>
-                            status text: ${keys[i][1]['status_text']}<br>
-                            updated on: ${keys[i][1]['update_on']} <br>
-                            created on: ${keys[i][1]['created_on']} <br><br>`;
+                    str += `<div id="jsonResult" class="jsonClass"><strong>status: </strong>${keys[i][1]['status']}<br>
+                    <strong>id</strong>: ${keys[i][1]['_id']}<br>
+                    <strong>title</strong>: ${keys[i][1]['title']}<br>
+                    <strong>text</strong>: ${keys[i][1]['text']}<br>
+                    <strong>created by</strong>: ${keys[i][1]['created_by']}<br>
+                    <strong>assigned to</strong>: ${keys[i][1]['assigned_to']}<br>
+                    <strong>status text</strong>: ${keys[i][1]['status_text']}<br>
+                    <strong>updated on</strong>: ${keys[i][1]['update_on']} <br>
+                    <strong>created on</strong>: ${keys[i][1]['created_on']} <br><br></div>`;
                 }
                 res.send(str);
             }

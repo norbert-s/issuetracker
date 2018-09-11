@@ -1,9 +1,9 @@
 const Joi = require('joi');
 
 const postOne = Joi.object().keys({
-    title: Joi.string().min(3).max(255).required().error(new Error('title field is mandatory- must be at least 5 and maximum 255 characters')),
-    text:Joi.string().min(10).max(3000).required().error(new Error('text field is mandatory- must be at least 10 and maximum 1000 characters')),
-    created_by:Joi.string().min(3).max(255).required().error(new Error('created_by field is mandatory- must be at least 5 and maximum 255 characters'))
+    title: Joi.string().min(3).max(255).required().error(new Error('title field is mandatory- must be at least 3 and maximum 255 characters')),
+    text:Joi.string().min(3).max(3000).required().error(new Error('text field is mandatory- must be at least 3 and maximum 3000 characters')),
+    created_by:Joi.string().min(3).max(255).required().error(new Error('created_by field is mandatory- must be at least 3 and maximum 255 characters'))
 
 });
 

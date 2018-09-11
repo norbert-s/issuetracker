@@ -32,21 +32,47 @@ input[type=text] {
   display:grid;
   justify-items: center;
   grid-template-columns:1fr 1fr;
+  row-gap:50px;
 }
-#apitests{
-  align-self:start;
-}
+/*#apitests{*/
+  /*align-self:start;*/
+/*}*/
 
-#jsonResult{
-
-}
 .main{
   width:80%;
   margin:auto;
 }
 #jsonFrame{
-  width:70%;
-  border:1px solid;
+  width:60%;
   margin:auto;
-
+}
+.jsonClass{
+  border:1px solid;
+  color:light-blue;
+  border-radius:5px;
+  padding:10px;
+  margin-bottom:10px;
+}
+textarea{
+  max-width:300px;
+  max-height:200px;
+  min-height:20px;
+  min-width:100px;
+}
+@media (max-width:800px){
+  .align_divs{
+    width:80%;
+    grid-template-columns:1fr ;
+  }
+  #jsonFrame{
+    width:80%;
+    margin:auto;
+  }
+  .jsonClass{
+    border:1px solid;
+    color:light-blue;
+    border-radius:5px;
+    padding:10px;
+    margin-bottom:10px;
+  }
 }

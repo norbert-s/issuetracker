@@ -35,7 +35,7 @@ let updateIssue= router.put('/api/issues/apitest',function(req,res){
     });
     MyIssue.findById({_id:id}).exec(async function(err,myIssue) {
         // console.log('myissue elotte'+myIssue);
-        if(myIssue==undefined) res.send('id cannot be found in the database');
+        if(myIssue==undefined) await res.send('this id cannot be found in the database');
         else{
             for (let i in myObj) {
                 if (myObj[i] == '' || myObj[i] == undefined ||myObj[i]==null) {
@@ -56,8 +56,22 @@ let updateIssue= router.put('/api/issues/apitest',function(req,res){
                 if(err) res.send(err);
                 else console.log('doc'+doc);
             });
-            await MyIssue.findById({_id:id},function(err,doc){
-                res.send(doc);
+            await MyIssue.findById({_id:id},async function(err,doc){
+                if(err) res.send(err);
+                else{
+                    let str = `<div id="jsonResult" class="jsonClass"><strong>result</strong>: Successfully updated<br>
+                    <strong>status</strong>: ${doc.status}<br>
+                    <strong>id</strong>: ${doc._id}<br>
+                    <strong>title</strong>: ${iTitle}<br>
+                    <strong>text</strong>: ${iText}<br>
+                    <strong>created_by</strong>: ${createdBy}<br>
+                    <strong>assigned_to</strong>: ${assignedTo}<br>
+                    <strong>status_text</strong>: ${statusText}<br>
+                    <strong>created_on</strong>: ${doc.created_on}<br>
+                    <strong>updated_on</strong>: ${doc.update_on}</div>`;
+                    await res.send(str);
+                }
+
             });
         }
     })
