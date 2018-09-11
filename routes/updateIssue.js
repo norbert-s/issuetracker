@@ -40,7 +40,7 @@ let updateIssue= router.put('/api/issues/apitest',function(req,res){
     let objektum ={title:iTitle,text:iText,created_by:createdBy,
         assigned_to:assignedTo,status_text:statusText,update_on:Date.now()};
 
-    console.log(`${iText}  ${iTitle} ${createdBy}`);
+    // console.log(`${iText}  ${iTitle} ${createdBy}`);
     let joiUpdate = updateOne.validate({
         id:id
     });

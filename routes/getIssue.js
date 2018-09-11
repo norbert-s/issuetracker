@@ -58,8 +58,8 @@ let getIssue =router.get('/api/issues/apitest',function (req,res){
         console.log('myogbj');
         console.log(myNewObj);
         let result = MyIssue.find(myNewObj).exec( function(err,myIssue) {
-            console.log('my issue');
-            console.log(myIssue);
+            // console.log('my issue');
+            // console.log(myIssue);
             if(err) res.send('There is no data to be found based on your query');
             else if(myIssue=='') res.send('There is no data to be found based on your query');
             else{
@@ -76,7 +76,7 @@ let getIssue =router.get('/api/issues/apitest',function (req,res){
                     <strong>updated on</strong>: ${keys[i][1]['update_on']} <br>
                     <strong>created on</strong>: ${keys[i][1]['created_on']} <br><br></div>`;
                 }
-                console.log(myIssue);
+                // console.log(myIssue);
                 res.send(str);
             }
         })
