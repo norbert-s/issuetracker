@@ -54,13 +54,14 @@ let getIssue =router.get('/api/issues/apitest',function (req,res){
     if (joiVal.error) res.send(joiVal.error.message);
     else{
         let myNewObj = findQueryCreator(myObj);
+        myNewObj.status=statusItt;
         console.log('myogbj');
         console.log(myNewObj);
-        MyIssue.find(myNewObj).exec( function(err,myIssue) {
+        let result = MyIssue.find(myNewObj).exec( function(err,myIssue) {
             console.log('my issue');
             console.log(myIssue);
-            if(err) res.send('There is no data to be found based on the query you have provided');
-
+            if(err) res.send('There is no data to be found based on your query');
+            else if(myIssue=='') res.send('There is no data to be found based on your query');
             else{
                 let str = '';
                 let keys = Object.entries(myIssue);
