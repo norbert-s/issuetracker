@@ -21,3 +21,58 @@ body {
 .id {
   font-size: 10.5px;
 }
+
+input[type=text] {
+  width: 300px;
+}
+
+.align_divs{
+  width:80%;
+  margin:auto;
+  display:grid;
+  justify-items: center;
+  grid-template-columns:1fr 1fr;
+  row-gap:50px;
+}
+/*#apitests{*/
+  /*align-self:start;*/
+/*}*/
+
+.main{
+  width:80%;
+  margin:auto;
+}
+#jsonFrame{
+  width:60%;
+  margin:auto;
+}
+.jsonClass{
+  border:1px solid;
+  color:light-blue;
+  border-radius:5px;
+  padding:10px;
+  margin-bottom:10px;
+}
+textarea{
+  max-width:300px;
+  max-height:200px;
+  min-height:20px;
+  min-width:100px;
+}
+@media (max-width:800px){
+  .align_divs{
+    width:80%;
+    grid-template-columns:1fr ;
+  }
+  #jsonFrame{
+    width:80%;
+    margin:auto;
+  }
+  .jsonClass{
+    border:1px solid;
+    color:light-blue;
+    border-radius:5px;
+    padding:10px;
+    margin-bottom:10px;
+  }
+}

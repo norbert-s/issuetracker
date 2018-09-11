@@ -1,43 +1,55 @@
 'use strict';
 
-var express     = require('express');
-var bodyParser  = require('body-parser');
-var expect      = require('chai').expect;
-var cors        = require('cors');
+const express     = require('express');
+const bodyParser  = require('body-parser');
+const expect      = require('chai').expect;
+const cors        = require('cors');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
+// const routerName = require('./routes/getIssue.js');
+const fccTestingRoutes  = require('./routes/fcctesting.js');
+const runner            = require('./test-runner');
 
-var apiRoutes         = require('./routes/api.js');
-var fccTestingRoutes  = require('./routes/fcctesting.js');
-var runner            = require('./test-runner');
-
-var app = express();
-
+const app = express();
+require('dotenv').config();
+const key = process.env.MLAB_URI;
+const mongodb = require('mongodb');
 app.use('/public', express.static(process.cwd() + '/public'));
-
+app.use(helmet());
+app.use(helmet.hidePoweredBy({setTo: "PHP 4.2"}));
 app.use(cors({origin: '*'})); //For FCC testing purposes only
-
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+let connection = mongoose.connect(key,{ useNewUrlParser: true })
+    .then(()=>console.log('Connected to the mango database'))
+    .catch(err => console.error('could not connect to mongo db',err));
 //Sample front-end
+
+app.use(helmet());
+app.use(helmet.hidePoweredBy({setTo: "PHP 4.2"}));
 app.route('/:project/')
   .get(function (req, res) {
     res.sendFile(process.cwd() + '/views/issue.html');
   });
 
-//Index page (static HTML)
 app.route('/')
   .get(function (req, res) {
     res.sendFile(process.cwd() + '/views/index.html');
   });
 
 //For FCC testing purposes
-fccTestingRoutes(app);
+// fccTestingRoutes(app);
 
 //Routing for API 
-apiRoutes(app);  
-    
+const getIssue= require('./routes/getIssue.js');
+const postIssue= require('./routes/postIssue.js');
+const deleteIssue= require('./routes/deleteIssue.js');
+const updateIssue= require('./routes/updateIssue.js');
+app.use(getIssue);
+app.use(postIssue);
+app.use(deleteIssue);
+app.use(updateIssue);
+
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
@@ -54,12 +66,15 @@ app.listen(process.env.PORT || 3000, function () {
       try {
         runner.run();
       } catch(e) {
-        var error = e;
+        const error = e;
           console.log('Tests are not valid:');
           console.log(error);
       }
     }, 3500);
   }
 });
+
+
+
 
 module.exports = app; //for testing
