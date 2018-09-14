@@ -48,7 +48,7 @@ let postIssue = router.post('/api/issues/apitest',async function (req,res){
                     <strong>status_text</strong>: ${doc.status_text}<br>
                     <strong>created_on</strong>: ${doc.created_on}<br>
                     <strong>updated_on</strong>: ${doc.update_on}</div>`;
-                        res.send(doc);
+                        res.send(str);
                     }
                 });
             }
