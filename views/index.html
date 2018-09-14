@@ -94,10 +94,13 @@
         <input type="text" name="created_by" placeholder="(optional)Created by" ><br>
         <input type="text" name="assigned_to" placeholder="(optional)Assigned to" ><br>
         <input type="text" name="status_text" placeholder="(optional)Status text" ><br>
+        Status<br>
+        <select name="status">
+          <option value="o">Open</option>
+          <option value="c">Closed</option>
+          <!--<option value="b">Both</option>-->
+        </select>
         <br>
-        <input id='openRadio' type="radio" name="status" value="o" checked>Open<br>
-        <input id='closedRadio' type="radio" name="status" value="c">Closed<br>
-        <input id='bothRadio' type="radio" name="status" value="b">Both<br>
         <button type="submit" >Submit Issue</button>
       </form>
       </div>
