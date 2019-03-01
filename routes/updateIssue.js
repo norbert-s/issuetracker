@@ -48,8 +48,8 @@ let updateIssue= router.put('/api/issues/apitest',function(req,res){
     else{
         MyIssue.findById({_id:id}).exec(async function(err,myIssue) {
             // console.log('myissue elotte'+myIssue);
-            if(myIssue==undefined) res.send('id cannot be found in the database');
-            else{
+            // if(myIssue==undefined) res.send('id cannot be found in the database');
+            if(myIssue!=undefined){
                 let myNewObj = findQueryCreator(objektum);
                 // console.log('myNewObj');
                 // console.log(myNewObj);
@@ -72,7 +72,7 @@ let updateIssue= router.put('/api/issues/apitest',function(req,res){
                     if(err) res.send(err);
                     else{
                         let str = `<div id="jsonResult" class="jsonClass"><strong>result</strong>: Successfully updated<br>
-                    <strong>status</strong>: ${doc.status}<br>
+                    <strong>status</strong>: ${doc.status}<br> 
                     <strong>id</strong>: ${doc._id}<br>
                     <strong>title</strong>: ${doc.title}<br>
                     <strong>text</strong>: ${doc.text}<br>

@@ -8,7 +8,7 @@ const postOne = Joi.object().keys({
 });
 
 const updateOne = Joi.object().keys({
-    id:Joi.string().required().min(24).error(new Error('id field is mandatory , please provide a valid id'))
+    id:Joi.string().required().min(24).error(new Error('id field is mandatory, please provide a valid id'))
 });
 
 const deleteOne = Joi.object().keys({

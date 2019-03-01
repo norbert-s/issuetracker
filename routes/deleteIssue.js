@@ -19,15 +19,15 @@ let deleteIssue=router.delete('/api/issues/apitest',async function (req, res){
         await MyIssue.findOne({_id:id},async function(err,myIssue){
             dThis = myIssue;
             console.log('myissue'+myIssue);
-            if(myIssue==undefined) res.send('the id that you are trying to delete is not in the database');
-            else if(err) res.send(err);
+            if(myIssue==undefined) res.send('Please enter a valid id!');
+            if(err) res.send(err);
             else{
                 await MyIssue.deleteOne({_id:id},async function(err,myIssue){
                     if(err) res.send('Something went wrong, try again');
                     else{
                         let str =
                             `<div class="jsonClass" id="jsonResult">
-                    The id: ${dThis._id} and the record below has been successfully deleted.<br>
+                    <strong>The id:</strong> ${dThis._id} and the record below has been successfully deleted.<br>
                     <strong>status</strong>: ${dThis.status}<br>
                     <strong>id</strong>: ${dThis._id}<br>
                     <strong>title</strong>: ${dThis.title}<br>
@@ -38,7 +38,7 @@ let deleteIssue=router.delete('/api/issues/apitest',async function (req, res){
                     <strong>created_on</strong>: ${dThis.created_on}<br>
                     <strong>updated_on</strong>: ${dThis.update_on}</div>`;
                         // console.log(myIssue);
-                        await res.send(str);
+                        res.send(str);
 
                     }
                 })
