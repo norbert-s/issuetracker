@@ -12,18 +12,28 @@ const runner            = require('./test-runner');
 
 const app = express();
 require('dotenv').config();
-const key = process.env.MLAB_URI;
-const mongodb = require('mongodb');
+//const key = process.env.MLAB_URI;
+const MongoClient = require('mongodb').MongoClient;
+
+
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use(helmet());
 app.use(helmet.hidePoweredBy({setTo: "PHP 4.2"}));
 app.use(cors({origin: '*'})); //For FCC testing purposes only
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-let connection = mongoose.connect(key,{ useNewUrlParser: true })
+// let connection = mongoose.connect(key,{ useNewUrlParser: true })
+//     .then(()=>console.log('Connected to the mango database'))
+//     .catch(err => console.error('could not connect to mongo db',err));
+//Sample front-end
+const uri = process.env.uri;
+let connection = mongoose.connect(uri, { useUnifiedTopology: true,useNewUrlParser: true } )
+
     .then(()=>console.log('Connected to the mango database'))
     .catch(err => console.error('could not connect to mongo db',err));
-//Sample front-end
+
+
+
 
 app.use(helmet());
 app.use(helmet.hidePoweredBy({setTo: "PHP 4.2"}));

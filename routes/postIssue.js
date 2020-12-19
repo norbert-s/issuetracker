@@ -53,9 +53,7 @@ let postIssue = router.post('/api/issues/apitest',async function (req,res){
                 });
             }
             catch(ex){
-
         }
-
     }
 });
 
