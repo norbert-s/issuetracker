@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const uri = process.env.uri;
 let connection = mongoose.connect(uri, { useUnifiedTopology: true,useNewUrlParser: true } )
 
-    .then(()=>console.log('Connected to the mango database'))
+    .then(()=>console.log('Connected to the mongo database'))
     .catch(err => console.error('could not connect to mongo db',err));
 
 

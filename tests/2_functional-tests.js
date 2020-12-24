@@ -14,12 +14,17 @@ global.chai = chai;
 
 global.expect = chai.expect;
 
-
+const titleMissing = 'title field is mandatory- must be at least 3 and maximum 255 characters';
 chai.use(chaiHttp);
+
+function giveBackStringifiedJSON(data){
+    return JSON.parse(JSON.stringify(data));
+}
+
 
 suite('Functional Tests', function() {
   
-    suite('POST /api/issues/{project} => object with issue data', function() {
+    suite.only('POST /api/issues/{project} => object with issue data', function() {
 
       test('Every field filled in', function(done) {
        chai.request(server)
@@ -49,14 +54,14 @@ suite('Functional Tests', function() {
               })
               .end(function(err, res){
                   assert.equal(res.status, 200);
-
+                  console.log("response body"+res.error);
                   //fill me in too!
 
                   done();
               });
       });
 
-      test('Missing required fields', function(done) {
+      test.only('Missing title field', function(done) {
           chai.request(server)
               .post('/api/issues/apitest')
               .send({
@@ -68,7 +73,11 @@ suite('Functional Tests', function() {
               })
               .end(function(err, res){
                   assert.equal(res.status, 200);
+                  console.log("error"+err);
                   assert.equal(err);
+                  myString = giveBackStringifiedJSON(res.text);
+                  console.log("response body"+myString);
+                  assert.equal(myString,titleMissing);
                   done();
               });
       });
