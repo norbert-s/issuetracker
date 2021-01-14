@@ -86,7 +86,7 @@ let updateIssue= router.put('/api/issues/apitest',function(req,res){
                 });
             }
             if(myIssue==undefined){
-                res.send('id cannot be found in the database');
+                res.send('Kindly provide a valid id, because your id is not in the database. It might have been deleted');
             }
         })
     }
